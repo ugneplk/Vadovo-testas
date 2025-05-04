@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <title>Koks tu būtum vadovas?</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; }
+        h1 { color: #2c3e50; }
+        .question { margin-bottom: 20px; }
+        .result { font-size: 1.2em; font-weight: bold; color: #27ae60; margin-top: 20px; }
+        button { padding: 10px 20px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Koks tu būtum vadovas?</h1>
+    <form id="quizForm">
+        <div class="question">
+            <p>1. Kai komandoje kyla konfliktas, ką darai pirmiausia?</p>
+            <input type="radio" name="q1" value="A"> A) Bandau iškart priimti sprendimą pats/pati<br>
+            <input type="radio" name="q1" value="B"> B) Įtraukiu komandą ir ieškome bendro sprendimo<br>
+            <input type="radio" name="q1" value="C"> C) Stebiu situaciją ir leidžiu viskam išsispręsti<br>
+            <input type="radio" name="q1" value="D"> D) Analizuoju, kas sukėlė konfliktą<br>
+        </div>
+        <div class="question">
+            <p>2. Kaip labiausiai mėgsti dirbti komandoje?</p>
+            <input type="radio" name="q2" value="A"> A) Kai aš priimu sprendimus<br>
+            <input type="radio" name="q2" value="B"> B) Kai visi dalyvauja sprendimų priėmime<br>
+            <input type="radio" name="q2" value="C"> C) Kai turiu visišką laisvę veikti<br>
+            <input type="radio" name="q2" value="D"> D) Kai viskas aiškiai suplanuota<br>
+        </div>
+        <div class="question">
+            <p>3. Kaip reaguoji į netikėtus pokyčius projekte?</p>
+            <input type="radio" name="q3" value="A"> A) Reaguoju greitai, net jei reikia imtis rizikos<br>
+            <input type="radio" name="q3" value="B"> B) Konsultuojuosi su kitais<br>
+            <input type="radio" name="q3" value="C"> C) Džiaugiuosi pokyčiais – daugiau galimybių!<br>
+            <input type="radio" name="q3" value="D"> D) Perskaičiuoju planus<br>
+        </div>
+        <div class="question">
+            <p>4. Ką rinktumeisi: greitą rezultatą ar kokybišką procesą?</p>
+            <input type="radio" name="q4" value="A"> A) Rezultatą, svarbu įgyvendinti<br>
+            <input type="radio" name="q4" value="B"> B) Kokybišką procesą su komandos įsitraukimu<br>
+            <input type="radio" name="q4" value="C"> C) Kūrybišką procesą<br>
+            <input type="radio" name="q4" value="D"> D) Tiksliai suplanuotą<br>
+        </div>
+        <div class="question">
+            <p>5. Kaip vertini komandos narių indėlį?</p>
+            <input type="radio" name="q5" value="A"> A) Deleguoju darbus pagal kompetencijas<br>
+            <input type="radio" name="q5" value="B"> B) Vertinu visų nuomonę<br>
+            <input type="radio" name="q5" value="C"> C) Svarbiausia – laisvė<br>
+            <input type="radio" name="q5" value="D"> D) Man svarbiausia – atsakomybės<br>
+        </div>
+        <div class="question">
+            <p>6. Kas tau artimiausia?</p>
+            <input type="radio" name="q6" value="A"> A) Kontrolė<br>
+            <input type="radio" name="q6" value="B"> B) Komandinis darbas<br>
+            <input type="radio" name="q6" value="C"> C) Kūryba<br>
+            <input type="radio" name="q6" value="D"> D) Struktūra<br>
+        </div>
+        <div class="question">
+            <p>7. Tavo stiprioji savybė:</p>
+            <input type="radio" name="q7" value="A"> A) Sprendimų priėmimas<br>
+            <input type="radio" name="q7" value="B"> B) Empatija<br>
+            <input type="radio" name="q7" value="C"> C) Idėjų generavimas<br>
+            <input type="radio" name="q7" value="D"> D) Planavimas<br>
+        </div>
+        <button type="button" onclick="showResult()">Sužinoti rezultatą</button>
+    </form>
+    <div class="result" id="result"></div>
+
+    <script>
+        function showResult() {
+            const form = document.forms["quizForm"];
+            const counts = { A: 0, B: 0, C: 0, D: 0 };
+            for (let i = 1; i <= 7; i++) {
+                const answer = form["q" + i].value;
+                if (answer) counts[answer]++;
+                else return alert("Atsakykite į visus klausimus.");
+            }
+
+            const maxType = Object.entries(counts).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+            let resultText = "";
+            if (maxType === "A") resultText = "Tu esi AUKŠČIAUSIO LYGIO VADOVAS – mėgsti vadovauti, greitai priimi sprendimus ir prisiimi atsakomybę.";
+            if (maxType === "B") resultText = "Tu esi KOMANDOS VADOVAS – vertini bendradarbiavimą, įtraukį ir rūpiniesi komanda.";
+            if (maxType === "C") resultText = "Tu esi KOMANDOS NARYS – kūrybingas, bet nesieki vadovauti, labiau domiesi įgyvendinimu nei valdymu.";
+            if (maxType === "D") resultText = "Tu esi INDIVIDUALUS DARBUOTOJAS – mėgsti dirbti savarankiškai, struktūriškai, nelinkęs į komandinius darbus.";
+
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>
